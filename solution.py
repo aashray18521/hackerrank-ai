@@ -7,17 +7,31 @@ dicti = tuple(dicti[0])
 
 def check(word):
     if(word in dicti):
-        print("True"+" "+word)
-    return
+        return True
+    return False
     
-temp = []
-remtemp = [] 
+
 def splitter(word):
-    for i in range(len(word)):
-        global temp.append(word[0:i+1])
-        global remtemp.append(word[i+1:])
-    global temp = global temp[::-1]
-    
+    index = -1
+    ans = ""
+    temp = []
+    remtemp = [] 
+    if(len(word) != 0):
+        for i in range(len(word), 0, -1):
+            temp.append(word[0:i+1])
+            index += 1
+            remtemp.append(word[i+1:])
+            if(check(temp[index])):
+                break
+        ans += temp[-1]
+        if(remtemp[-1] != ''):
+            ans = ans + ' ' + str(splitter(remtemp[-1]))
+
+        #temp = temp[::-1]
+        
+    else:
+        return
+    print(ans)
 
 t = int(input())
 while(t):
@@ -40,12 +54,11 @@ while(t):
     
     #print(temp)
     #print(remtemp)
-    for i in range(len(global temp)):
-        check(global temp[i])
+    #global temp
+    #for i in range(len(temp)):
+    #    check(temp[i])
     
     #print(dicti)
-    del temp[:]
-    del remtemp[:]
-    
+    #print(temp)
     
     #print(string)
